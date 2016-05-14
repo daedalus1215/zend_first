@@ -19,8 +19,16 @@ class AlbumController extends AbstractActionController
     
     /* These are the 4 actions that we want to use. */
     
-    // http://zendi/album
-    public function indexAction() {} 
+    
+    public function indexAction() {
+        // In order to list the albums, we need to retrieve them from the model 
+        // and pass them to the view. To do this, we fill in indexAction() 
+        // within AlbumController. Update the AlbumController's indexAction() 
+        // like this:
+        return new ViewModel(array(
+            'albums' => $this->getAlbumTable()->fetchAll(),
+        ));
+    } 
     
     // http://zendi/album/add
     public function addAction() {}

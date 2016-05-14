@@ -25,7 +25,7 @@ return array(
     // All added stuff - 05 14 16
     'db' => array(
         'driver' => 'Pdo',
-        'dsn' => 'mysql:dbname=zf2tutorial;host=localhost',
+        'dsn' => 'mysql:dbname=zend_tutorial;host=localhost',
         'driver_options' => array(
             PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
         ),

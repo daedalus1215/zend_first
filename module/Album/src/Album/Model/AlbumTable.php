@@ -7,8 +7,10 @@
  */
 
 
-
 namespace Album\Model;
+
+
+ use Zend\Db\TableGateway\TableGateway;
 
 class AlbumTable
 {
@@ -19,7 +21,7 @@ class AlbumTable
     
     public function __construct(TableGateway $tableGateway) 
     {       
-        $this->$tableGateway = $tableGateway;
+        $this->tableGateway = $tableGateway;
     }
     
     /*
