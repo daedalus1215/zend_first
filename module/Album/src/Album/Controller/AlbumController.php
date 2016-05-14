@@ -5,6 +5,8 @@
  * called {Controller name}Controller.php within the Controller directory of the module. 
  * In our case that is module/Album/src/Album/Controller.
  * Each action is a public method within the controller class that is named {action name}Action.
+ * 
+ * continue from: http://framework.zend.com/manual/current/en/user-guide/database-and-models.html
  */
 namespace Album\Controller;
 
