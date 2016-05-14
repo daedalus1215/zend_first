@@ -1,5 +1,10 @@
 <?php
 /**
+ * We now need to tell the ModuleManager that this new module exists. This is done in the appliaction's config/application.config.php file
+ * which is provided by the skeleton application. Update this file so that its modules section contains the Album
+ * module as well.
+ */
+/**
  * If you need an environment-specific system or application configuration,
  * there is an example in the documentation
  * @see http://framework.zend.com/manual/current/en/tutorials/config.advanced.html#environment-specific-system-configuration
@@ -9,6 +14,7 @@ return array(
     // This should be an array of module namespaces used in the application.
     'modules' => array(
         'Application',
+        'Album',            //<- Larry - Added this line
     ),
 
     // These are various options for the listeners attached to the ModuleManager
