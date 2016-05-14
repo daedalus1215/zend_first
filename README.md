@@ -1,3 +1,3 @@
-I left off about to make a ServiceManager to configure the table gateway and inject into the AlbumTable at:
+I left off about to work with Forms and actions
 
- http://framework.zend.com/manual/current/en/user-guide/database-and-models.html
+http://framework.zend.com/manual/current/en/user-guide/forms-and-actions.html
