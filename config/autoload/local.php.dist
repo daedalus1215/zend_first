@@ -11,5 +11,13 @@
  * credentials from accidentally being committed into version control.
  */
 
+
+/*
+ * Put db credentials in this file, so that they are not in the git respository as local.php is ignored.)
+ */
 return array(
+    'db' => array(
+        'username' => 'root',
+        'password' => '',
+    ),
 );

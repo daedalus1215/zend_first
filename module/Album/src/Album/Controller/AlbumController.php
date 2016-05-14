@@ -15,6 +15,7 @@ use Zend\View\Model\ViewModel;
 
 class AlbumController extends AbstractActionController 
 {
+    protected $albumTable;
     
     /* These are the 4 actions that we want to use. */
     
@@ -29,6 +30,17 @@ class AlbumController extends AbstractActionController
     
     // http://zendi/album/delete
     public function deleteAction() {}
+    
+    // Now that the ServiceManager can create an AlbumTable instance for us, 
+    // we can add a method to the controller to retrieve it. Add getAlbumTable() to the AlbumController class:
+    public function getAlbumTable() 
+    {
+        if (!$this->albumTable) {
+            $sm = $this->getServiceLocator();
+            $this->albumTable = $sm->get('Album\Model\AlbumTable');            
+        }
+        return $this->albumTable;
+    }
     
 }
 

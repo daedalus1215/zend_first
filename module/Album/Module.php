@@ -11,6 +11,11 @@ namespace Album;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 
+use Album\Model\Album;
+use Album\Model\AlbumTable;
+use Zend\Db\ResultSet\ResultSet;
+use Zend\Db\TableGateway\TableGateway;
+
 /**
  * The ModuleManager will call getAutoloaderConfig() and getConfig() auto for us.
  */
