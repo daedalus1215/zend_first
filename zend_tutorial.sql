@@ -1,8 +1,8 @@
--- MySQL dump 10.15  Distrib 10.0.17-MariaDB, for Win32 (AMD64)
+-- MySQL dump 10.16  Distrib 10.1.13-MariaDB, for Win32 (AMD64)
 --
 -- Host: localhost    Database: zend_tutorial
 -- ------------------------------------------------------
--- Server version	10.0.17-MariaDB
+-- Server version	10.1.13-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -39,30 +39,6 @@ LOCK TABLES `album` WRITE;
 INSERT INTO `album` VALUES (1,'The  Military  Wives','In  My  Dreams'),(2,'Adele','21'),(3,'Bruce  Springsteen','Wrecking Ball (Deluxe)'),(4,'Lana  Del  Rey','Born  To  Die'),(5,'Gotye','Making  Mirrors');
 /*!40000 ALTER TABLE `album` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Table structure for table `albums`
---
-
-DROP TABLE IF EXISTS `albums`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `albums` (
-  `id` int(6) unsigned NOT NULL AUTO_INCREMENT,
-  `artist` varchar(100) NOT NULL,
-  `title` varchar(100) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `albums`
---
-
-LOCK TABLES `albums` WRITE;
-/*!40000 ALTER TABLE `albums` DISABLE KEYS */;
-/*!40000 ALTER TABLE `albums` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -73,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-05-14 12:18:14
+-- Dump completed on 2016-05-15 12:24:10
