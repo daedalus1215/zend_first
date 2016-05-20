@@ -1,27 +1,17 @@
-<?php 
+ <?php
+ // module/Album/view/album/album/add.phtml:
 
-// module/Album/view/album/album/add.phtml
+ $title = 'Add new album';
+ $this->headTitle($title);
+ ?>
+ <h1><?php echo $this->escapeHtml($title); ?></h1>
+ <?php
+ $form->setAttribute('action', $this->url('album', array('action' => 'add')));
+ $form->prepare();
 
-/*
- FIrst we display a title before we render the form.
- ZF2 provides some view helpers to render the form:
- The form() view helper has an openTag() and closeTag() method which we use to open and close the form. Then each element with a label we can use formRow but the two elements that are standalone we use formHidden and formSubmit()
-*/
-$title = 'Add new Album';
-$this->headTitle('$title');
-?>
-
-<h1><?php echo $this->escapeHtml($title); ?></h1>
-<?php 
-
-    $form->setAttribute('action', $this->url('album', array('action' => 'add')));
-    $form->prepare();
-    
-    echo $this->form()->openTag($form);
-    /*echo $this->formHidden($form->get('id'));
-    echo $this->formRow($form->get('title'));
-    echo $this->formRow($form->get('artist'));
-    echo $this->formSubmit($form->get('submit'));*/
- echo $this->formCollection($form);
-    echo $this->form()->closeTag();
-?>
+ echo $this->form()->openTag($form);
+ echo $this->formHidden($form->get('id'));
+ echo $this->formRow($form->get('title'));
+ echo $this->formRow($form->get('artist'));
+ echo $this->formSubmit($form->get('submit'));
+ echo $this->form()->closeTag();

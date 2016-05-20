@@ -6,18 +6,12 @@ use Zend\Form\Form;
 
 class AlbumForm extends Form 
 {
-    public function __constructor($name = null) 
-    {
-        // we want to ignore the name passed
-        parent::__contruct('album');
-        
-        
-        
-        /*
-            The first thing we do is set the name of the form, as we call the parent's constructor. We create four form elements: the id, title, artist, and submit button. For each of the items we set various attributes and options, including the label to be displayed.
-        
-        */
-        $this->add(array(
+    public function __construct($name = null)
+     {
+         // we want to ignore the name passed
+         parent::__construct('album');
+
+         $this->add(array(
              'name' => 'id',
              'type' => 'Hidden',
          ));

@@ -40,7 +40,7 @@ class AlbumController extends AbstractActionController
     {
         // We instantiate a new AlbumForm and grab it's submit element and set it's value to Add.
         $form = new AlbumForm();
-        //$form->get('submit')->setValue('Add');
+        $form->get('submit')->setValue('Add');
         
         $request = $this->getRequest();
         
