@@ -8,13 +8,26 @@
  * 
  * We could use other ORM tech, such as Doctrine or Propel.
  */
+
+
+
 namespace Album\Model;
+
+
+ // Add these import statements
+ use Zend\InputFilter\InputFilter;
+ use Zend\InputFilter\InputFilterAwareInterface;
+ use Zend\InputFilter\InputFilterInterface;
+
+
+
 
 class Album implements InputFilterAwareInterface 
 {
     public $id;
     public $artist;
     public $title;
+    protected $inputFilter;                       // <-- Add this variable
     
     // In order to work with Zend\Db's TableGateway class, we need to implement
     // the exchangeArray() method. This method simply copies the data from the passed
@@ -33,6 +46,8 @@ class Album implements InputFilterAwareInterface
     
     Within getInputFilter we instantiate an InputFilter and then add the inputs that we require . We add one input for each property that we wish to filter or validate.
     
+    Now we need to get the form to display and then process it on submission. This is done within the AlbumController's addAction().
+    
     */
     
     // Add content to these methods
@@ -43,28 +58,25 @@ class Album implements InputFilterAwareInterface
     
     public function getInputFilter() 
     {
-        if (!$this->inputFilter) {
-            $inputFilter = new InputFilter();
-            
+ if (!$this->inputFilter) {
+             $inputFilter = new InputFilter();
 
-            $inputFilter->add(array(
-                'name'     => 'id',
-                'required' => true,
-                'filters'  => array(
-                    array('name' => 'Int'),
+             $inputFilter->add(array(
+                 'name'     => 'id',
+                 'required' => true,
+                 'filters'  => array(
+                     array('name' => 'Int'),
                  ),
              ));
-            
-            
-            $inputFilter->add(array(
-                'name'     => 'artist',
-                'required' => true,
-                'filters'  => array(
-                    array('name' => 'StripTags'), // remove unnecessary tags
-                    array('name' => 'StringTrim'), // remove unnecessary white space
+
+             $inputFilter->add(array(
+                 'name'     => 'artist',
+                 'required' => true,
+                 'filters'  => array(
+                     array('name' => 'StripTags'),
+                     array('name' => 'StringTrim'),
                  ),
-                
-                'validators' => array(
+                 'validators' => array(
                      array(
                          'name'    => 'StringLength',
                          'options' => array(
@@ -75,7 +87,6 @@ class Album implements InputFilterAwareInterface
                      ),
                  ),
              ));
-
 
              $inputFilter->add(array(
                  'name'     => 'title',
@@ -100,10 +111,6 @@ class Album implements InputFilterAwareInterface
          }
 
          return $this->inputFilter;
+     }
+ }
 
-        }
-    }
-    
-    
-    
-}

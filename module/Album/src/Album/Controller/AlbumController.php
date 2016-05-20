@@ -13,6 +13,11 @@ namespace Album\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
+use Album\Model\Album;          // <-- Add this import
+use Album\Form\AlbumForm;       // <-- Add this import
+
+
+
 class AlbumController extends AbstractActionController 
 {
     protected $albumTable;
@@ -31,7 +36,36 @@ class AlbumController extends AbstractActionController
     } 
     
     // http://zendi/album/add
-    public function addAction() {}
+    public function addAction() 
+    {
+        // We instantiate a new AlbumForm and grab it's submit element and set it's value to Add.
+        $form = new AlbumForm();
+        //$form->get('submit')->setValue('Add');
+        
+        $request = $this->getRequest();
+        
+        // if the $request object has been posted we know we can do our work. We set the inputFilter from an album instance. 
+        if ($request->isPost()) {
+            $album = new Album();
+            $form->setInputFilter($album->getInputFilter());
+            
+            // Set the data posted data to the form and check to see if it is valid using the isValid() method. 
+            $form->setData($request->getPost());
+            
+            if ($form->isValid()) {
+                // If valid we then grab the data from the form and store to the model using saveAlbum()
+                $album->exchangeArray($form->getData());
+                $this->getAlbumTable()->saveAlbum($album);
+                
+                // After saving the new Album row we redirect to the album page.
+                
+                // Redirect to list of albums
+                return $this->redirect()->toRoute('album');
+            }
+        }
+        // Finally we return an array - the form object, because it is the only thing we want to send to the view. We return an array containing variables to be assigned to the view and it will create a ViewModel behind the scenes for us. 
+        return array('form' => $form);
+    }
     
     // http://zendi/album/edit
     public function editAction() {}
