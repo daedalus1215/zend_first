@@ -10,7 +10,7 @@
  */
 namespace Album\Model;
 
-class Album 
+class Album implements InputFilterAwareInterface 
 {
     public $id;
     public $artist;
@@ -25,4 +25,85 @@ class Album
         $this->artist   = (!empty($data['artist'])) ? $data['artist'] : null;
         $this->title    = (!empty($data['title'])) ? $data['title'] : null;
     }
+    
+    
+    
+    /**
+    The InputFilterAwareInterface defines two methods: setInputFilter() and getInputFilter(). We only need to implement getInputFilter() so we simply throw an exception in setInputFilter()
+    
+    Within getInputFilter we instantiate an InputFilter and then add the inputs that we require . We add one input for each property that we wish to filter or validate.
+    
+    */
+    
+    // Add content to these methods
+    public function setInputFilter(InputFilterInterface $inputFilter) 
+    {
+        throw new \Exception("not used");
+    }
+    
+    public function getInputFilter() 
+    {
+        if (!$this->inputFilter) {
+            $inputFilter = new InputFilter();
+            
+
+            $inputFilter->add(array(
+                'name'     => 'id',
+                'required' => true,
+                'filters'  => array(
+                    array('name' => 'Int'),
+                 ),
+             ));
+            
+            
+            $inputFilter->add(array(
+                'name'     => 'artist',
+                'required' => true,
+                'filters'  => array(
+                    array('name' => 'StripTags'), // remove unnecessary tags
+                    array('name' => 'StringTrim'), // remove unnecessary white space
+                 ),
+                
+                'validators' => array(
+                     array(
+                         'name'    => 'StringLength',
+                         'options' => array(
+                             'encoding' => 'UTF-8',
+                             'min'      => 1,
+                             'max'      => 100,
+                         ),
+                     ),
+                 ),
+             ));
+
+
+             $inputFilter->add(array(
+                 'name'     => 'title',
+                 'required' => true,
+                 'filters'  => array(
+                     array('name' => 'StripTags'),
+                     array('name' => 'StringTrim'),
+                 ),
+                 'validators' => array(
+                     array(
+                         'name'    => 'StringLength',
+                         'options' => array(
+                             'encoding' => 'UTF-8',
+                             'min'      => 1,
+                             'max'      => 100,
+                         ),
+                     ),
+                 ),
+             ));
+
+             $this->inputFilter = $inputFilter;
+         }
+
+         return $this->inputFilter;
+
+        }
+    }
+    
+    
+    
 }
