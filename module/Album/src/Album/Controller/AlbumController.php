@@ -89,8 +89,27 @@ class AlbumController extends AbstractActionController
         }
         
         $form = new AlbumForm();
-        $form->
+        $form->bind($album);
+        $form->get('submit')->setAttribute('value', 'Edit');
         
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $form->setInputFilter($album->getInputFilter());
+            $form->setData($request->getPost());
+            
+            if ($form->isValid()) {
+                $this->getAlbumTable()->saveAlbum($album);
+                
+                // Redirect to list of albums
+                return $this->redirect()->toRoute('album');
+            }
+        }
+        
+        // This has not been posted, let's render the form
+        return array(
+            'id' => $id,
+            'form' => $form,
+        ); 
     }
     
     // http://zendi/album/delete
