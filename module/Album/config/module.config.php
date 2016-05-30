@@ -37,7 +37,7 @@ return array(
                     //that will be mapped to named parameters in the matched route. 
                     //In this case, the route --/album[/:action][/:id]-- 
                     //which will match any URL that starts with /album.
-                    'route'       => '/album[:action][/:id]',
+                    'route'       => '/album[/:action][/:id]',
                     //constraints section allows us to ensure that the characters 
                     //within a segment are as expected, so we have limited actions 
                     //to starting with a letter and then subsequent characters only 

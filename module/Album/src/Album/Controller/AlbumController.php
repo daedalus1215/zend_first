@@ -21,10 +21,18 @@ use Album\Form\AlbumForm;       // <-- Add this import
 class AlbumController extends AbstractActionController 
 {
     protected $albumTable;
-    
+    // Now that the ServiceManager can create an AlbumTable instance for us, 
+    // we can add a method to the controller to retrieve it. Add getAlbumTable() to the AlbumController class:
+    public function getAlbumTable() 
+    {
+        if (!$this->albumTable) {
+            $sm = $this->getServiceLocator();
+            $this->albumTable = $sm->get('Album\Model\AlbumTable');            
+        }
+        return $this->albumTable;
+    }
     /* These are the 4 actions that we want to use. */
-    
-    
+     
     public function indexAction() {
         // In order to list the albums, we need to retrieve them from the model 
         // and pass them to the view. To do this, we fill in indexAction() 
@@ -68,63 +76,54 @@ class AlbumController extends AbstractActionController
     }
     
     // http://zendi/album/edit
-    public function editAction() 
-    {
-        $id  = (int) $this->params()->fromRoute('id', 0);
-        if (!$id) {
-            return $this->redirect()->toRoute('album', array(
-                'action' => 'add',
-            ));
-        }
-        
-        
-        // Get the Album with the specified id. An exception is thrown if it cannot be found, in which case go to the index page.
-        try {
-            $album = $this->getAlbumTable()->getAlbum($id);
-        } 
-        catch(\Exception $ex) {
-            return $this->redirect()->toRoute('album', array(
-                'action' => 'index'
-            ));    
-        }
-        
-        $form = new AlbumForm();
-        $form->bind($album);
-        $form->get('submit')->setAttribute('value', 'Edit');
-        
-        $request = $this->getRequest();
-        if ($request->isPost()) {
-            $form->setInputFilter($album->getInputFilter());
-            $form->setData($request->getPost());
-            
-            if ($form->isValid()) {
-                $this->getAlbumTable()->saveAlbum($album);
-                
-                // Redirect to list of albums
-                return $this->redirect()->toRoute('album');
-            }
-        }
-        
-        // This has not been posted, let's render the form
-        return array(
-            'id' => $id,
-            'form' => $form,
-        ); 
-    }
+    public function editAction()
+     {
+
+         $id = (int) $this->params()->fromRoute('id', 0);
+         if (!$id) {
+             return $this->redirect()->toRoute('album', array(
+                 'action' => 'add'
+             ));
+         }
+
+         // Get the Album with the specified id.  An exception is thrown
+         // if it cannot be found, in which case go to the index page.
+         try {
+             $album = $this->getAlbumTable()->getAlbum($id);
+         }
+         catch (\Exception $ex) {
+             return $this->redirect()->toRoute('album', array(
+                 'action' => 'index'
+             ));
+         }
+
+         $form  = new AlbumForm();
+         $form->bind($album);
+         $form->get('submit')->setAttribute('value', 'Edit');
+         
+         $request = $this->getRequest();
+         if ($request->isPost()) {
+             $form->setInputFilter($album->getInputFilter());
+             $form->setData($request->getPost());
+
+             if ($form->isValid()) {
+                 $this->getAlbumTable()->saveAlbum($album);
+
+                 // Redirect to list of albums
+                 return $this->redirect()->toRoute('album');
+             }
+         }
+
+         return array(
+             'id' => $id,
+             'form' => $form,
+         );
+     }
     
     // http://zendi/album/delete
     public function deleteAction() {}
     
-    // Now that the ServiceManager can create an AlbumTable instance for us, 
-    // we can add a method to the controller to retrieve it. Add getAlbumTable() to the AlbumController class:
-    public function getAlbumTable() 
-    {
-        if (!$this->albumTable) {
-            $sm = $this->getServiceLocator();
-            $this->albumTable = $sm->get('Album\Model\AlbumTable');            
-        }
-        return $this->albumTable;
-    }
+    
     
 }
 

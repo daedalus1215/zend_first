@@ -39,7 +39,10 @@ class Album implements InputFilterAwareInterface
         $this->title    = (!empty($data['title'])) ? $data['title'] : null;
     }
     
-    
+    public function getArrayCopy() 
+    {
+        return get_object_vars($this);
+    }
     
     /**
     The InputFilterAwareInterface defines two methods: setInputFilter() and getInputFilter(). We only need to implement getInputFilter() so we simply throw an exception in setInputFilter()
@@ -58,7 +61,7 @@ class Album implements InputFilterAwareInterface
     
     public function getInputFilter() 
     {
- if (!$this->inputFilter) {
+        if (!$this->inputFilter) {
              $inputFilter = new InputFilter();
 
              $inputFilter->add(array(
