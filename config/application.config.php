@@ -1,20 +1,11 @@
 <?php
-/**
- * We now need to tell the ModuleManager that this new module exists. This is done in the appliaction's config/application.config.php file
- * which is provided by the skeleton application. Update this file so that its modules section contains the Album
- * module as well.
- */
-/**
- * If you need an environment-specific system or application configuration,
- * there is an example in the documentation
- * @see http://framework.zend.com/manual/current/en/tutorials/config.advanced.html#environment-specific-system-configuration
- * @see http://framework.zend.com/manual/current/en/tutorials/config.advanced.html#environment-specific-application-configuration
- */
 return array(
     // This should be an array of module namespaces used in the application.
     'modules' => array(
         'Application',
-        'Album',            //<- Larry - Added this line
+        'Debug',
+        'User',
+        'Exam',
     ),
 
     // These are various options for the listeners attached to the ModuleManager
@@ -29,30 +20,30 @@ return array(
         ),
 
         // An array of paths from which to glob configuration files after
-        // modules are loaded. These effectively override configuration
+        // modules are loaded. These effectively overide configuration
         // provided by modules themselves. Paths may use GLOB_BRACE notation.
         'config_glob_paths' => array(
-            'config/autoload/{{,*.}global,{,*.}local}.php',
+            'config/autoload/{,*.}{global,local}.php',
         ),
 
         // Whether or not to enable a configuration cache.
         // If enabled, the merged configuration will be cached and used in
         // subsequent requests.
-        //'config_cache_enabled' => $booleanValue,
+        //'config_cache_enabled' => true,
 
         // The key used to create the configuration cache file name.
-        //'config_cache_key' => $stringKey,
+        //'config_cache_key' => '1',
 
         // Whether or not to enable a module class map cache.
         // If enabled, creates a module class map cache which will be used
         // by in future requests, to reduce the autoloading process.
-        //'module_map_cache_enabled' => $booleanValue,
+        //'module_map_cache_enabled' => true,
 
         // The key used to create the class map cache file name.
-        //'module_map_cache_key' => $stringKey,
+        'module_map_cache_key' => '1',
 
         // The path in which to cache merged configuration.
-        //'cache_dir' => $stringPath,
+        //'cache_dir' => 'data/cache/module',
 
         // Whether or not to enable modules dependency checking.
         // Enabled by default, prevents usage of modules that depend on other modules
@@ -68,7 +59,7 @@ return array(
     //         'interface'       => $stringOptionalInterface,
     //         'method'          => $stringRequiredMethodName,
     //     ),
-    // ),
+    // )
 
    // Initial configuration with which to seed the ServiceManager.
    // Should be compatible with Zend\ServiceManager\Config.

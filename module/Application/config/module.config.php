@@ -3,13 +3,15 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/ZendSkeletonApplication for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace Application;
-
 return array(
+    'application' => array (
+        'name' 	  => 'Training Center',
+        'version' => '0.0.1'
+    ),
     'router' => array(
         'routes' => array(
             'home' => array(
@@ -55,12 +57,13 @@ return array(
         ),
     ),
     'service_manager' => array(
-        'abstract_factories' => array(
-            'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
-            'Zend\Log\LoggerAbstractServiceFactory',
-        ),
         'factories' => array(
-            'translator' => 'Zend\Mvc\Service\TranslatorServiceFactory',
+            'translator' => 'Zend\I18n\Translator\TranslatorServiceFactory',
+            'cipher'     => 'Application\Service\Factory\SymmetricCipher',
+            'navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
+        ),
+        'abstract_factories' => array(
+            'Zend\Cache\Service\StorageCacheAbstractServiceFactory'              
         ),
     ),
     'translator' => array(
@@ -75,7 +78,7 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Application\Controller\Index' => Controller\IndexController::class
+            'Application\Controller\Index' => 'Application\Controller\IndexController'
         ),
     ),
     'view_manager' => array(
@@ -89,16 +92,31 @@ return array(
             'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
             'error/404'               => __DIR__ . '/../view/error/404.phtml',
             'error/index'             => __DIR__ . '/../view/error/index.phtml',
+            // paginator views
+            'paginator/sliding'       => __DIR__ . '/../view/paginator/sliding.phtml',
         ),
         'template_path_stack' => array(
             __DIR__ . '/../view',
         ),
     ),
-    // Placeholder for console routes
-    'console' => array(
-        'router' => array(
-            'routes' => array(
+    'navigation' => array(
+        'default' => array(
+            array(
+                'label' => 'Home',
+                'route' => 'home',
+                'pages' => array (
+                    array(
+                        'label' => 'About',
+                        'route' => 'application/default',
+                        'controller' => 'index',
+                        'action' => 'about'
+                    ),
+                    array(
+                        'label' => 'Book',
+                        'uri'   => 'http://learnzf2.com',
+                    )
+                )
             ),
-        ),
+        )
     ),
 );

@@ -11,29 +11,6 @@
  * file.
  */
 
-
-/*
- * Configure the ServiceManager so that it knows how to get a Zend\Db\Adapter\Adapter. 
- * This is done using a factory called Zend\Db\Adapter\AdapterServiceFactory 
- * which we can configure within the merged config system.
- * 
- * ZF2's ModuleManager merges all the configuration from each module's module.config.php 
- * file and then merges int the files in config/autoload (*.global.php and then *.local.php files). 
- */
-
 return array(
-    // All added stuff - 05 14 16
-    'db' => array(
-        'driver' => 'Pdo',
-        'dsn' => 'mysql:dbname=zend_tutorial;host=localhost',
-        'driver_options' => array(
-            PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
-        ),
-    ),
-    'service_manager' => array(
-        'factories' => array(
-            'zend\Db\Adapter\Adapter'
-                            => 'Zend\Db\Adapter\AdapterServiceFactory',
-        ),
-    ),
+    // ...
 );
