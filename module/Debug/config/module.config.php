@@ -45,6 +45,7 @@ return array(
             'timer' => 'Debug\Service\Factory\TimerAbstractFactory',
         ),
     ),
+    // timers key is a key that is accessed by the abstract_factories above.
     'timers'          => array( // top-level config key for our abstract factory
         'timer' => array( //name of our service
             'times_as_float' => true,
