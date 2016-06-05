@@ -42,12 +42,16 @@ return array(
     ),
     'service_manager' => array(
         'factories' => array(
+            'timer' => 'Debug\Service\Factory\Timer',
         ),
     ),
     'controllers' => array(
         'invokables' => array(
             'Debug\Controller\Index' => 'Debug\Controller\IndexController'
         ),
+    ),
+    'timer' => array(
+        'times_as_float' => true,
     ),
     'view_manager' => array(
         'template_path_stack' => array(
