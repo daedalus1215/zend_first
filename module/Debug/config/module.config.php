@@ -41,17 +41,23 @@ return array(
           ),
     ),
     'service_manager' => array(
-        'factories' => array(
-            'timer' => 'Debug\Service\Factory\Timer',
+        'abstract_factories' => array(
+            'timer' => 'Debug\Service\Factory\TimerAbstractFactory',
+        ),
+    ),
+    'timers'          => array( // top-level config key for our abstract factory
+        'timer' => array( //name of our service
+            'times_as_float' => true,
+            // and in the array we have the parameters to use for the service.
+        ),
+        'timer_non_float' => array( // name of our service.
+            'times_as_float' => false, 
         ),
     ),
     'controllers' => array(
         'invokables' => array(
             'Debug\Controller\Index' => 'Debug\Controller\IndexController'
         ),
-    ),
-    'timer' => array(
-        'times_as_float' => true,
     ),
     'view_manager' => array(
         'template_path_stack' => array(

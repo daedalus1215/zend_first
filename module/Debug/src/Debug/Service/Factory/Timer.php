@@ -11,7 +11,7 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 
 use Debug\Service\Factory\Timer as TimerService;
 
-class Timer implements ServiceLocatorInterface
+class Timer implements FactoryInterface
 {
     
     public function createService(ServiceLocatorInterface $serviceLocator) 
