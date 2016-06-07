@@ -22,10 +22,9 @@ class IndexController extends AbstractActionController
 
         $viewModel = new ViewModel();
         $viewModel->setVariables(array(
-                                    'version'=> $config['application']['version'],
-                                    'applicationName' => $config['application']['name']
+                        'version'=> $config['application']['version'],
+                        'applicationName' => $config['application']['name']
         ));
-        $viewModel->setTemplate('application/index/index');
         return $viewModel;
     }
 

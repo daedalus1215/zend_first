@@ -26,7 +26,7 @@ class IndexController extends AbstractActionController
         'version'=> $config['application']['version'],
         'applicationName' => $config['application']['name']
         ));
-        $viewModel->setTemplate('application/index/about');
+        $viewModel->setTemplate('application/index/index');
         // We add the view model as a child to the layout
         // The rendered content from the child model will be used
         // as value for the content variable
