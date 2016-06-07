@@ -12,17 +12,19 @@ return array(
                     ),
                 ),
             ),
+ // Simply drop new controllers in, and you can access them
+            // using the path /debug/:controller/:action
             'debug' => array(
-              'type' => 'Literal',
-              'options' => array(
-                'route' => '/debug',
-                'defaults' => array(
-                  '__NAMESPACE__' => 'Debug\Controller',
-                  'controller' => 'Index',
-                  'action'     => 'index',
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/debug',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Debug\Controller',
+                        'controller'    => 'Index',
+                        'action'        => 'index',
+                    ),
                 ),
-              ),
-              'may_terminate' => true,
+                'may_terminate' => true,
                 'child_routes' => array(
                     'default' => array(
                         'type'    => 'Segment',
@@ -32,27 +34,16 @@ return array(
                                 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
                                 'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
                             ),
-                            'defaults' => array( 
+                            'defaults' => array(
                             ),
                         ),
                     ),
                 ),
-            ), 
-          ),
+            ),
+        ),
     ),
     'service_manager' => array(
-        'abstract_factories' => array(
-            'timer' => 'Debug\Service\Factory\TimerAbstractFactory',
-        ),
-    ),
-    // timers key is a key that is accessed by the abstract_factories above.
-    'timers'          => array( // top-level config key for our abstract factory
-        'timer' => array( //name of our service
-            'times_as_float' => true,
-            // and in the array we have the parameters to use for the service.
-        ),
-        'timer_non_float' => array( // name of our service.
-            'times_as_float' => false, 
+        'factories' => array(
         ),
     ),
     'controllers' => array(
@@ -62,7 +53,7 @@ return array(
     ),
     'view_manager' => array(
         'template_path_stack' => array(
-          __DIR__.'/../view',
+            __DIR__ . '/../view',
         ),
     ),
 );

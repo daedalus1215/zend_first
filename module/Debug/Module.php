@@ -14,13 +14,8 @@ use Zend\ModuleManager\ModuleEvent;
 use Zend\EventManager\Event;
 use Zend\EventManager\EventManager;
 
-class Module implements AutoloaderProviderInterface
+class Module
 {
-    public function getAutoloaderConfig() {
-
-    }
-
-
     public function init(ModuleManager $moduleManager)
     {
         $eventManager = $moduleManager->getEventManager();
@@ -37,18 +32,18 @@ class Module implements AutoloaderProviderInterface
 
     public function onBootstrap(MvcEvent $e)
     {
+        $debug_stop = "";
         $eventManager = $e->getApplication()->getEventManager();
         $eventManager->attach(MvcEvent::EVENT_DISPATCH_ERROR
                             , array($this, 'handleError'));
 
-        $d= "";
         // Access the ServiceManager
         $serviceManager = $e->getApplication()->getServiceManager();
         // Here we start the timer
         $timer = $serviceManager->get('timer');
         $timer->start('mvc-execution');
 
-                    
+
 
         // attach listener to the finish event that has to be executed with priority 2
         // The priority here is 2 because listeners with the priority will be executed just before the
@@ -56,13 +51,13 @@ class Module implements AutoloaderProviderInterface
         $eventManager->attach(MvcEvent::EVENT_FINISH
                             , array($this, 'getMvcDuration')
                             , 2);
-        
-        
-        
+
+
+
         // Chapter 3 addition - let's display some sort of debug layout with the main layout.
         $eventManager->attach(MvcEvent::EVENT_RENDER,
-                array($this, 'addDebugOverlay'), 
-                100);  
+                array($this, 'addDebugOverlay'),
+                100);
     }
 
 
@@ -87,9 +82,9 @@ class Module implements AutoloaderProviderInterface
         $timer = $serviceManager->get('timer');
         $duration = $timer->stop('mvc-execution');
         // finally print the duration
-        error_log('MVC Duration: ' . $duration . ' seconds');
+        error_log('MVC Duration - BLAH: ' . $duration . ' seconds');
     }
-    
+
     public function addDebugOverlay(MvcEvent $event)
     {
         $debug = "";
@@ -97,7 +92,7 @@ class Module implements AutoloaderProviderInterface
         $sidebarView = new ViewModel();
         $sidebarView->setTemplate('debug/layout/sidebar');
         $sidebarView->addChild($viewModel, 'content');
-        
+
         $event->setViewModel($sidebarView);
     }
 }
