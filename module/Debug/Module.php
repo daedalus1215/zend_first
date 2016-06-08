@@ -8,13 +8,12 @@ namespace Debug;
  * and open the template in the editor.
  */
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
-use Zend\Mvc\ModuleRouteListener;
 use Zend\ModuleManager\ModuleManager;
-use Zend\ModuleManager\ModuleEvent;
 use Zend\EventManager\Event;
-use Zend\EventManager\EventManager;
+use Zend\Mvc\MvcEvent;
+use Zend\ModuleManager\ModuleEvent;
 
-class Module
+class Module implements AutoloaderProviderInterface
 {
     public function init(ModuleManager $moduleManager)
     {
@@ -34,8 +33,8 @@ class Module
     {
         $debug_stop = "";
         $eventManager = $e->getApplication()->getEventManager();
-        $eventManager->attach(MvcEvent::EVENT_DISPATCH_ERROR
-                            , array($this, 'handleError'));
+
+        $eventManager->attach(MvcEvent::EVENT_DISPATCH_ERROR, array($this, 'handleError'));
 
         // Access the ServiceManager
         $serviceManager = $e->getApplication()->getServiceManager();
@@ -43,30 +42,22 @@ class Module
         $timer = $serviceManager->get('timer');
         $timer->start('mvc-execution');
 
-
-
         // attach listener to the finish event that has to be executed with priority 2
         // The priority here is 2 because listeners with the priority will be executed just before the
         // actual finish event is triggered.
-        $eventManager->attach(MvcEvent::EVENT_FINISH
-                            , array($this, 'getMvcDuration')
-                            , 2);
-
-
+        $eventManager->attach(MvcEvent::EVENT_FINISH, array($this, 'getMvcDuration'), 2);
 
         // Chapter 3 addition - let's display some sort of debug layout with the main layout.
-        $eventManager->attach(MvcEvent::EVENT_RENDER,
-                array($this, 'addDebugOverlay'),
-                100);
+        $eventManager->attach(MvcEvent::EVENT_RENDER, array($this, 'addDebugOverlay'), 100);
     }
 
 
     public function handleError(MvcEvent $e)
     {
         $controller = $e->getController();
-        $error = $e->getParam('error');
-        $exception = $e->getParam('exception');
-        $message = sprintf('Error dispatching controller "%s". Error was "%s"', $controller, $error);
+        $error      = $e->getParam('error');
+        $exception  = $e->getParam('exception');
+        $message    = sprintf('Error dispatching controller "%s". Error was "%s"', $controller, $error);
         if ($exception instanceof \Exception) {
             $exception->getTraceAsString();
         }
@@ -95,4 +86,20 @@ class Module
 
         $event->setViewModel($sidebarView);
     }
+
+    public function getAutoloaderConfig()
+    {
+        return array(
+            'Zend\Loader\ClassMapAutoloader' => array(
+                __DIR__ . '/autoload_classmap.php',
+            ),
+            'Zend\Loader\StandardAutoloader' => array(
+                'namespaces' => array(
+            // if we're in a namespace deeper than one level we need to fix the \ in the path
+                    __NAMESPACE__ => __DIR__ . '/src/' . str_replace('\\', '/' , __NAMESPACE__),
+                ),
+            ),
+        );
+    }
+
 }

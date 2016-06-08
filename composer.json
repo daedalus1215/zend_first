@@ -18,7 +18,6 @@
 		"BSD-3-Clause"
 	],
 	"require" : {
-		"learnzf2/debug" : "dev-master",
 		"php" : ">=5.3.3",
 		"doctrine/common" : ">=2.1",
 		"doctrine/orm" : ">=2.1",

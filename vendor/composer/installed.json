@@ -950,57 +950,6 @@
         ]
     },
     {
-        "name": "symfony/yaml",
-        "version": "v2.8.6",
-        "version_normalized": "2.8.6.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/symfony/yaml.git",
-            "reference": "e4fbcc65f90909c999ac3b4dfa699ee6563a9940"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/symfony/yaml/zipball/e4fbcc65f90909c999ac3b4dfa699ee6563a9940",
-            "reference": "e4fbcc65f90909c999ac3b4dfa699ee6563a9940",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.9"
-        },
-        "time": "2016-03-29 19:00:15",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "2.8-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Symfony\\Component\\Yaml\\": ""
-            },
-            "exclude-from-classmap": [
-                "/Tests/"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Fabien Potencier",
-                "email": "fabien@symfony.com"
-            },
-            {
-                "name": "Symfony Community",
-                "homepage": "https://symfony.com/contributors"
-            }
-        ],
-        "description": "Symfony Yaml Component",
-        "homepage": "https://symfony.com"
-    },
-    {
         "name": "phpunit/php-text-template",
         "version": "1.2.1",
         "version_normalized": "1.2.1.0",
@@ -1380,52 +1329,54 @@
         ]
     },
     {
-        "name": "learnzf2/debug",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
+        "name": "symfony/yaml",
+        "version": "v2.8.7",
+        "version_normalized": "2.8.7.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/slaff/learnzf-debug.git",
-            "reference": "da883dc8735ddc04eeb5235467d1a543057c6b32"
+            "url": "https://github.com/symfony/yaml.git",
+            "reference": "815fabf3f48c7d1df345a69d1ad1a88f59757b34"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/slaff/learnzf-debug/zipball/da883dc8735ddc04eeb5235467d1a543057c6b32",
-            "reference": "da883dc8735ddc04eeb5235467d1a543057c6b32",
+            "url": "https://api.github.com/repos/symfony/yaml/zipball/815fabf3f48c7d1df345a69d1ad1a88f59757b34",
+            "reference": "815fabf3f48c7d1df345a69d1ad1a88f59757b34",
             "shasum": ""
         },
         "require": {
-            "php": ">=5.3.3",
-            "zendframework/zendframework": "2.*"
+            "php": ">=5.3.9"
         },
-        "time": "2013-06-27 21:35:04",
+        "time": "2016-06-06 11:11:27",
         "type": "library",
-        "installation-source": "source",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.8-dev"
+            }
+        },
+        "installation-source": "dist",
         "autoload": {
-            "psr-0": {
-                "Debug\\": "src/"
+            "psr-4": {
+                "Symfony\\Component\\Yaml\\": ""
             },
-            "classmap": [
-                "Module.php"
+            "exclude-from-classmap": [
+                "/Tests/"
             ]
         },
         "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
         "authors": [
             {
-                "name": "Slavey Karadzhov",
-                "email": "slaff@linux-bg.org",
-                "homepage": "http://zf2consulting.com",
-                "role": "Author"
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "https://symfony.com/contributors"
             }
         ],
-        "description": "Debug module for the ZF2Book",
-        "homepage": "http://learnzf2.com",
-        "keywords": [
-            "book",
-            "debug",
-            "learn",
-            "profile",
-            "zf2"
-        ]
+        "description": "Symfony Yaml Component",
+        "homepage": "https://symfony.com"
     }
 ]

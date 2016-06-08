@@ -98,15 +98,10 @@ class ComposerStaticInitc905944903b35bee05785c6049311370
             array (
                 0 => __DIR__ . '/..' . '/doctrine/annotations/lib',
             ),
-            'Debug\\' => 
-            array (
-                0 => __DIR__ . '/..' . '/learnzf2/debug/src',
-            ),
         ),
     );
 
     public static $classMap = array (
-        'Debug\\Module' => __DIR__ . '/..' . '/learnzf2/debug/Module.php',
         'File_Iterator' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Iterator.php',
         'File_Iterator_Facade' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Facade.php',
         'File_Iterator_Factory' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Factory.php',
