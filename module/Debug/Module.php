@@ -16,7 +16,9 @@ use Zend\ModuleManager\ModuleEvent;
 
 class Module implements AutoloaderProviderInterface
 {
-    
+    // I do not know how to do pass the duration of time so that I can pass it
+    // to the sidebar
+
     public function getAutoloaderConfig()
     {
         return array(
@@ -31,13 +33,13 @@ class Module implements AutoloaderProviderInterface
             ),
         );
     }
-    
+
      public function getConfig()
     {
         return include __DIR__ . '/config/module.config.php';
     }
-    
-    
+
+
     public function init(ModuleManager $moduleManager)
     {
         $eventManager = $moduleManager->getEventManager();
@@ -94,19 +96,27 @@ class Module implements AutoloaderProviderInterface
         $serviceManager = $event->getApplication()->getServiceManager();
         // Get the already created instance of our timer service.
         $timer = $serviceManager->get('timer');
-        $duration = $timer->stop('mvc-execution');
+        $this->duration = $timer->stop('mvc-execution');
         // finally print the duration
-        error_log('MVC Duration - BLAH: ' . $duration . ' seconds');
+        error_log('MVC Duration - BLAH: ' . $this->duration . ' seconds');
     }
 
     public function addDebugOverlay(MvcEvent $event)
     {
+        // Get the duration.
+        $serviceManager = $event->getApplication()->getServiceManager();
+        $timer = $serviceManager->get('timer');
+        $duration = $timer->getTime('mvc-execution');
+
         $debug = "";
         $viewModel = $event->getViewModel();
         $sidebarView = new ViewModel();
         $sidebarView->setTemplate('debug/layout/sidebar');
+
+        $sidebarView->huh = $duration;
+
         $sidebarView->addChild($viewModel, 'content');
 
         $event->setViewModel($sidebarView);
-    } 
+    }
 }
