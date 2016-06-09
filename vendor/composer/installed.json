@@ -1378,5 +1378,54 @@
         ],
         "description": "Symfony Yaml Component",
         "homepage": "https://symfony.com"
+    },
+    {
+        "name": "learnzf2/debug",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/slaff/learnzf-debug.git",
+            "reference": "da883dc8735ddc04eeb5235467d1a543057c6b32"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/slaff/learnzf-debug/zipball/da883dc8735ddc04eeb5235467d1a543057c6b32",
+            "reference": "da883dc8735ddc04eeb5235467d1a543057c6b32",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.3",
+            "zendframework/zendframework": "2.*"
+        },
+        "time": "2013-06-27 21:35:04",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "psr-0": {
+                "Debug\\": "src/"
+            },
+            "classmap": [
+                "Module.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "authors": [
+            {
+                "name": "Slavey Karadzhov",
+                "email": "slaff@linux-bg.org",
+                "homepage": "http://zf2consulting.com",
+                "role": "Author"
+            }
+        ],
+        "description": "Debug module for the ZF2Book",
+        "homepage": "http://learnzf2.com",
+        "keywords": [
+            "book",
+            "debug",
+            "learn",
+            "profile",
+            "zf2"
+        ]
     }
 ]
