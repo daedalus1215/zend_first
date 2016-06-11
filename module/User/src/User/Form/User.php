@@ -15,8 +15,6 @@ use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterInterface;
 use Zend\InputFilter\Factory as InputFactory;
 
-use Zend\InputFilter\InputFilterInterface;
-
 class User extends Form
 {
 
@@ -28,21 +26,21 @@ class User extends Form
 
     public function __construct()
     {
-        parent::construct();
+        parent::__construct();
 
         $this->setAttribute('method', 'post');
 
-        setupEmailField();
+        $this->setupEmailField();
 
-        setupPasswordFields();
+        $this->setupPasswordFields();
 
-        setupNameField();
+        $this->setupNameField();
 
-        setupPhoneField();
+        $this->setupPhoneField();
 
-        setupAutomationProtection();
+        $this->setupAutomationProtection();
 
-        setupSubmitField();
+        $this->setupSubmitField();
     }
 
 
@@ -184,15 +182,15 @@ class User extends Form
             $inputFilter = new InputFilter();
             $factory = new InputFactory();
 
-            applyEmailAddressFilter($inputFilter, $factory);
+            $this->applyEmailAddressFilter($inputFilter, $factory);
 
-            applyNameFilter($inputFilter, $factory);
+            $this->applyNameFilter($inputFilter, $factory);
 
-            applyPasswordFilter($inputFilter, $factory);
+            $this->applyPasswordFilter($inputFilter, $factory);
 
-            applyPhotoFilter($inputFilter, $factory);
+            $this->applyPhotoFilter($inputFilter, $factory);
 
-            applyPhoneFilter($inputFilter, $factory);
+            $this->applyPhoneFilter($inputFilter, $factory);
 
             $this->filter = $inputFilter;
         }
@@ -274,10 +272,12 @@ class User extends Form
                ),
            ),
            'validators' => array(
-               'name'     => 'identical',
-               'options'  => array(
-                   'token' => 'password'
-               )
+                array(
+                    'name'     => 'identical',
+                    'options'  => array(
+                        'token' => 'password'
+                    )
+                )
            )
        )));
    }

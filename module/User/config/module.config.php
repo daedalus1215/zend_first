@@ -3,7 +3,7 @@
 return array(
     'view_manager' => array(
         'template_path_stack' => array(
-            __DIR__ . '/../view',
+            'user' => __DIR__ . '/../view',
         ),
     ),
     'controllers' => array(
@@ -26,8 +26,9 @@ return array(
                     'route'    => '/user',
                     // Define default controller and action to be called when this route is matched.
                     'defaults' => array(
-                        'controller' => 'User\Controller\Account',
-                        'action'     => 'index',
+                        '__NAMESPACE__' => 'User\Controller',
+                        'controller' => 'Account',
+                        'action'     => 'me',
                     ),
                 ),
                 'may_terminate' => true,
