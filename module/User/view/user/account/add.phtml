@@ -1,11 +1,15 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+// We call the prepare here in order to fill the initial data and adjust the form properties, if needed.
+$this->form1->prepare();
+
+echo $this->form()->openTag($this->form1);
+
+// The helper below is the one that builds the form elements.
+echo $this->formCollection($this->form1);
+
+// If we want to have tighter control over the form elements we can display them one by one as follows;
+//visualizes the email elements only
+echo $this->formElement($this->form1->get('email'));
+echo $this->form()->closeTag();
 ?>
-
-
-HI
