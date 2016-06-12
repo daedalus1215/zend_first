@@ -67,6 +67,9 @@ class Module implements AutoloaderProviderInterface
         $timer = $serviceManager->get('timer');
         $timer->start('mvc-execution');
 
+        // attach listener to render event where we will inject the databse profiler object to the page.
+        $eventManager->attach(MvcEvent::EVENT_RENDER, array($this, 'injectViewVariables'), 100);
+
         // attach listener to the finish event that has to be executed with priority 2
         // The priority here is 2 because listeners with the priority will be executed just before the
         // actual finish event is triggered.
@@ -89,6 +92,32 @@ class Module implements AutoloaderProviderInterface
 
         error_log($message);
     }
+
+
+    /**
+     * Injects common variables in the view model
+     * @param MvcEvent $event
+     */
+    public function injectViewVariables(MvcEvent $event)
+    {
+        $viewModel = $event->getViewModel();
+
+        $services = $event->getApplication()->getServiceManager();
+        $variables = array();
+
+        if ($services->has('database-profiler')) {
+            // If we have database profiler service then we inject it in the view
+            $profiler = $services->get('database-profiler');
+            $variables['profiler'] = $profiler;
+        }
+
+        if (!empty($variables)) {
+            $viewModel->setVariable($variables);
+        }
+    }
+
+
+
 
     public function getMvcDuration(MvcEvent $event)
     {

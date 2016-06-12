@@ -4,4 +4,17 @@ $d = "";
 ?>
 <?= $this->content ?>
 This page took :<div style="background-color: yellow;"><?= $huh ?> milliseconds.</div>
+
+<?php
+if ($this->profiler) {
+    echo '<div id="profiler">Db Profiler:';
+    foreach ($this->profiler->getProfiles() as $profile) {
+        //@todo - I stoped here. page 92
+    }
+}
+
+
+?>
+
+
 <h1>Bottom Line</h1>
