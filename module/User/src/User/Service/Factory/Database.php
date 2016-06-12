@@ -10,11 +10,11 @@ namespace User\Service\Factory;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\Db\Adapter\Adapter as DbAdapter;
-use Zend\Di\ServiceLocator;
+use Zend\ServiceManager\ServiceLocatorInterface;
 
 class Database implements FactoryInterface
 {
-    public function createService(\Zend\ServiceManager\ServiceLocatorInterface $serviceLocator)
+    public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $config = $serviceLocator->getConfig('config');
         $adapter = new DbAdapter($config['db']);

@@ -18,6 +18,11 @@ return array(
             'User\Controller\Account' => 'User\Controller\AccountController',
         ),
     ),
+    'table-gateway' => array(
+        'map' => array(
+            'users' => 'User\Model\User',
+        ),
+    ),
     // This line opens the configuration for the RouteManager
     'router' => array(
         // Open configuration for all possible routes.
