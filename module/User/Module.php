@@ -30,4 +30,15 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface
     {
         return include __DIR__ . '/config/module.config.php';
     }
+    
+    
+    public function onBootstrap($e)
+    {
+      $services = $e->getApplication()->getServiceManager();
+      $dbAdapter = $services->get('database');
+      
+      // Sets the default database adapter
+      \Zend\Db\TableGateway\Feature\GlobalAdapterFeature::setStaticAdapter($dbAdapter);
+      
+    }
 }
