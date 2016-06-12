@@ -6,6 +6,12 @@ return array(
             'user' => __DIR__ . '/../view',
         ),
     ),
+    'service_manager' => array(
+      'factories' => array(
+        // database object allows us to query the database and additionally escape parameter values.
+        'database' => 'User\Service\Factory\Database'
+      ),
+    ),
     'controllers' => array(
         'invokables' => array(
            // below is key                      and below is the fully qualified class name
