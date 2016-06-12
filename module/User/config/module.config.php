@@ -3,14 +3,17 @@
 return array(
     'view_manager' => array(
         'template_path_stack' => array(
-            'user' => __DIR__ . '/../view',
+            'user'                    => __DIR__ . '/../view',
         ),
     ),
     'service_manager' => array(
-      'factories' => array(
-        // database object allows us to query the database and additionally escape parameter values.
-        'database' => 'User\Service\Factory\Database'
-      ),
+        'factories'  => array(
+          // database object allows us to query the database and additionally escape parameter values.
+          'database'                  => 'User\Service\Factory\Database',
+        ),
+        'invokables' => array(
+            'table-gateway'           => 'User\Service\Invokable\TableGateway'
+        )
     ),
     'controllers' => array(
         'invokables' => array(
@@ -20,7 +23,7 @@ return array(
     ),
     'table-gateway' => array(
         'map' => array(
-            'users' => 'User\Model\User',
+            'users'                   => 'User\Model\User',
         ),
     ),
     // This line opens the configuration for the RouteManager

@@ -15,7 +15,10 @@ use Zend\Db\TableGateway\TableGateway as DbTableGateway;
 class TableGateway implements ServiceLocatorAwareInterface
 {
 
-
+  /**
+   *
+   * @var ServiceLocatorInterface
+   */
   protected $serviceLocator;
 
   /**

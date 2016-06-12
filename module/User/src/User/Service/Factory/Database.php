@@ -16,7 +16,7 @@ class Database implements FactoryInterface
 {
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $config = $serviceLocator->getConfig('config');
+        $config = $serviceLocator->get('config');
         $adapter = new DbAdapter($config['db']);
         return $adapter;
     }

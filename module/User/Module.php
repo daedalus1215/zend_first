@@ -16,11 +16,10 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface
     public function getAutoloaderConfig()
     {
         return array(
-
             'Zend\Loader\StandardAutoloader' => array(
                 'namespaces' => array(
                     // Autoload all classes from namespace 'User' from '/module/Blog/src/Blog'.
-                    __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
+                    __NAMESPACE__ => __DIR__ . '/src/' . str_replace('\\', '/' , __NAMESPACE__),
                 ),
             ),
         );
@@ -30,15 +29,15 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface
     {
         return include __DIR__ . '/config/module.config.php';
     }
-    
-    
+
+
     public function onBootstrap($e)
     {
       $services = $e->getApplication()->getServiceManager();
       $dbAdapter = $services->get('database');
-      
+
       // Sets the default database adapter
       \Zend\Db\TableGateway\Feature\GlobalAdapterFeature::setStaticAdapter($dbAdapter);
-      
+
     }
 }
