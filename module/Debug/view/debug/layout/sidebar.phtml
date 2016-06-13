@@ -12,12 +12,11 @@ if ($this->profiler) {
     echo '<div id="profiler">Db Profiler:';
     foreach ($this->profiler->getProfiles() as $profile) {
         //@todo - I stoped here. page 92
-        echo '"'. $profile['sql'] .;
-
-//                echo '"'. $profile['sql'].' ('.implode(',',
-//                       $profile['parameters']->getNamedArray()).')" took '.
-//                       $profile['elapse'].' seconds<br>';
+        echo '"'. $profile['sql'] .'('.implode(',',
+                $profile['paramteres']->getNamedArray()).')" took '.
+                $profile['elapse'].' seconds<br>';
     }
+    echo "</div>";
 }
 
 

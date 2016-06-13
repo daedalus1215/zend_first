@@ -9,6 +9,7 @@
 namespace Debug\Service\Initializer;
 
 use Zend\ServiceManager\InitializerInterface;
+use Zend\Db\Adapter\Profiler\Profiler;
 use Zend\Db\Adapter\Profiler\ProfilerAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 

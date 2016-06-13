@@ -56,7 +56,6 @@ class Module implements AutoloaderProviderInterface
 
     public function onBootstrap(MvcEvent $e)
     {
-        $debug_stop = "";
         $eventManager = $e->getApplication()->getEventManager();
 
         $eventManager->attach(MvcEvent::EVENT_DISPATCH_ERROR, array($this, 'handleError'));
@@ -70,16 +69,20 @@ class Module implements AutoloaderProviderInterface
         // attach listener to render event where we will inject the databse profiler object to the page.
         $eventManager->attach(MvcEvent::EVENT_RENDER, array($this, 'injectViewVariables'), 100);
 
-        // attach listener to the finish event that has to be executed with priority 2
-        // The priority here is 2 because listeners with the priority will be executed just before the
-        // actual finish event is triggered.
-        $eventManager->attach(MvcEvent::EVENT_FINISH, array($this, 'getMvcDuration'), 2);
-
         // Chapter 3 addition - let's display some sort of debug layout with the main layout.
         $eventManager->attach(MvcEvent::EVENT_RENDER, array($this, 'addDebugOverlay'), 100);
+
+        //  Attach listener to the finish event that has to be executed with priority 2. The priority here is 2 because listeners with the priority will be executed just before the actual finish event is triggered.
+        $eventManager->attach(MvcEvent::EVENT_FINISH, array($this, 'getMvcDuration'), 2);
+
+        $eventManager->attach(MvcEvent::EVENT_FINISH, array($this, 'dbProfilerStats'), 2);
+
     }
 
-
+    /**
+     *  Log errors
+     * @param MvcEvent $e
+     */
     public function handleError(MvcEvent $e)
     {
         $controller = $e->getController();
@@ -112,24 +115,14 @@ class Module implements AutoloaderProviderInterface
         }
 
         if (!empty($variables)) {
-            $viewModel->setVariable($variables);
+            $viewModel->setVariables($variables);
         }
     }
 
-
-
-
-    public function getMvcDuration(MvcEvent $event)
-    {
-        // Here we get the ServiceManager.
-        $serviceManager = $event->getApplication()->getServiceManager();
-        // Get the already created instance of our timer service.
-        $timer = $serviceManager->get('timer');
-        $this->duration = $timer->stop('mvc-execution');
-        // finally print the duration
-        error_log('MVC Duration - BLAH: ' . $this->duration . ' seconds');
-    }
-
+    /**
+     * Inject sidebar.phtml into the ViewModel.
+     * @param MvcEvent $event
+     */
     public function addDebugOverlay(MvcEvent $event)
     {
         // Get the duration.
@@ -147,5 +140,41 @@ class Module implements AutoloaderProviderInterface
         $sidebarView->addChild($viewModel, 'content');
 
         $event->setViewModel($sidebarView);
+    }
+
+
+    /**
+     *
+     * Grab the time it took to render the page and log it.
+     * @param MvcEvent $event
+     */
+    public function getMvcDuration(MvcEvent $event)
+    {
+        // Here we get the ServiceManager.
+        $serviceManager = $event->getApplication()->getServiceManager();
+        // Get the already created instance of our timer service.
+        $timer = $serviceManager->get('timer');
+        $this->duration = $timer->stop('mvc-execution');
+        // finally print the duration
+        error_log('MVC Duration - BLAH: ' . $this->duration . ' seconds');
+    }
+
+
+    /**
+     * Page 92 Handle
+     * where SQL queries have been performed, we can add extra code that logs this info to the standard error output.
+     * @param MvcEvent $event
+     */
+    public function dbProfilerStats(MvcEvent $event)
+    {
+        $services = $event->getApplication()->getServiceManager();
+        if ($services->has('database-profiler')) {
+            $profiler = $services->get('database-profiler');
+            foreach ($profiler->getProfiles() as $profile) {
+                $message = '"' . $profile['sql'] . ' ('.implode(',', $profile['paramters']->getNamedArray()).')" took '.$profile['elapse'].' seconds'."\n";
+                error_log("DB_PROFILER: " . $message);
+            }
+        }
+
     }
 }
