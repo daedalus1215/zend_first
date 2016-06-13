@@ -38,6 +38,8 @@ class User extends Form
 
         $this->setupPhoneField();
 
+        $this->setupFileField();
+
         $this->setupAutomationProtection();
 
         $this->setupSubmitField();

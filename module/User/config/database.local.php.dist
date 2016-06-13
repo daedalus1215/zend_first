@@ -8,7 +8,7 @@ return array(
       'driver' => 'Mysqli',
       'database' => 'tc', // generally required the name of the database (schema).
       'username' => 'root', // generally required the connection username.
-      'password' => '', // generally required the connection password.
+      'password' => 'root', // generally required the connection password.
       // not generally required the IP address or hostname to connect to
       'hostname' => 'localhost',
       //'port' => 1234, // not generally required the port to connect to (if applicable).

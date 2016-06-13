@@ -4,4 +4,20 @@ $d = "";
 ?>
 <?= $this->content ?>
 This page took :<div style="background-color: yellow;"><?= $huh ?> milliseconds.</div>
+
 <h1>Bottom Line</h1>
+
+<?php
+if ($this->profiler) {
+    echo '<div id="profiler">Db Profiler:';
+    foreach ($this->profiler->getProfiles() as $profile) {
+        //@todo - I stoped here. page 92
+        echo '"'. $profile['sql'] .'('.implode(',',
+                $profile['paramteres']->getNamedArray()).')" took '.
+                $profile['elapse'].' seconds<br>';
+    }
+    echo "</div>";
+}
+
+
+?>
