@@ -21,6 +21,7 @@
     </head>
     <body>
         <div class="navbar navbar-inverse navbar-fixed-top">
+          <!-- Menu Navigation -->
             <div class="navbar-inner">
                 <div class="container">
                     <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -31,15 +32,15 @@
                     <a class="brand" href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Skeleton Application') ?></a>
                     <div class="nav-collapse collapse">
                     	<ul class="nav">
-<?php 
+<?php
         $navHelper = $this->navigation('navigation');
-        $containers = $navHelper->getContainer(); 
+        $containers = $navHelper->getContainer();
         foreach($containers->getPages() as $page) {
             $class = "";
             if ($page->isActive()) {
                 $class = "active";
-            } 
-                                    
+            }
+
             if(count($page)) {
                  // if there are subpages we render the menu a bit different
                  $label  = $page->getLabel();
@@ -49,7 +50,7 @@
                          ($class?' '.$class:'')
                  );
                  printf('    <a href="%s" class="dropdown-toggle" data-toggle="dropdown">%s<b class="caret"></b></a>'."\n",
-                             $page->getHref(), 
+                             $page->getHref(),
                              $label
                  );
                  echo '<ul class="dropdown-menu">'."\n";
@@ -62,16 +63,16 @@
                        echo "</ul></li>\n";
                   }
                   else {
-                       printf("<li class=\"%s\">%s</li>\n",$class,$navHelper->htmlify($page));	
-                       }	
+                       printf("<li class=\"%s\">%s</li>\n",$class,$navHelper->htmlify($page));
+                       }
                   }
 ?>						</ul>
 					</div><!--/.nav-collapse -->
                 </div>
             </div>
         </div>
-        
-<?php 
+
+<?php
 $namespaces = array ('error','success','info','default');
 foreach ($namespaces as $namespace) {
 	$flashMessages = $this->flashmessenger()->render($namespace);
@@ -81,12 +82,12 @@ foreach ($namespaces as $namespace) {
     <a class="close" data-dismiss="alert">×</a>
     <?= $flashMessages ?>
 </div>
-<?php 	
+<?php
 	}
-}        
-?>  
-        
-        
+}
+?>
+
+
         <div class="container">
             <?php echo $this->content; ?>
             <hr>

@@ -34,12 +34,22 @@ class Module implements AutoloaderProviderInterface
         );
     }
 
-     public function getConfig()
+
+    /**
+     * Setup where this module's configuration is stored.
+     * @return File.
+     */
+    public function getConfig()
     {
         return include __DIR__ . '/config/module.config.php';
     }
 
 
+    /**
+     * Called during the loadModule event of the Preparation Phase.
+     *
+     * @param ModuleManager $moduleManager
+     */
     public function init(ModuleManager $moduleManager)
     {
         $eventManager = $moduleManager->getEventManager();
@@ -47,12 +57,14 @@ class Module implements AutoloaderProviderInterface
                               array($this, 'loadedModulesInfo'));
     }
 
+
     public function loadedModulesInfo(Event $event)
     {
         $moduleManager = $event->getTarget();
         $loadedModules = $moduleManager->getLoadedModules();
         error_log(var_export($loadedModules, true));
     }
+
 
     public function onBootstrap(MvcEvent $e)
     {
@@ -76,8 +88,8 @@ class Module implements AutoloaderProviderInterface
         $eventManager->attach(MvcEvent::EVENT_FINISH, array($this, 'getMvcDuration'), 2);
 
         $eventManager->attach(MvcEvent::EVENT_FINISH, array($this, 'dbProfilerStats'), 2);
-
     }
+
 
     /**
      *  Log errors
