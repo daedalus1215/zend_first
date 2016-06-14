@@ -1,0 +1,21 @@
+<?php
+/**
+ * Template file that you would copy over to config/autoload, and remove the .dist suffix.
+ */
+return array(
+    'db' => array(
+      // The database driver. Mysqli, Sqlsrv, Pdo_Sqlite, Pdo_Mysql, Pdo=OtherPdoDriver
+      'driver' => 'Mysqli',
+      'database' => 'tc', // generally required the name of the database (schema).
+      'username' => 'root', // generally required the connection username.
+      'password' => 'root', // generally required the connection password.
+      // not generally required the IP address or hostname to connect to
+      'hostname' => 'localhost',
+      //'port' => 1234, // not generally required the port to connect to (if applicable).
+      //'charset' => 'utf8', // not generally required the character set to use
+      'options' => array(
+        // For the mysqli driver, at the moment, you will have to add the driver option buffer_results. Otherwise, you will be able to get only the first result from a set.
+        'buffer_result' => 1
+      )
+    )
+);

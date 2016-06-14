@@ -183,7 +183,7 @@ class Module implements AutoloaderProviderInterface
         if ($services->has('database-profiler')) {
             $profiler = $services->get('database-profiler');
             foreach ($profiler->getProfiles() as $profile) {
-                $message = '"' . $profile['sql'] . ' ('.implode(',', $profile['paramters']->getNamedArray()).')" took '.$profile['elapse'].' seconds'."\n";
+                $message = '"' . $profile['sql'] . ' ('.implode(',', $profile['parameters']->getNamedArray()).')" took '.$profile['elapse'].' seconds'."\n";
                 error_log("DB_PROFILER: " . $message);
             }
         }
