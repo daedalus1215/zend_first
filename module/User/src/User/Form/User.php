@@ -95,17 +95,17 @@ class User extends Form
                     ),
         ));
 
-        $this->add(array(
-            'type' => 'Zend\Form\Element\File',
-            'name' => 'photo',
-            'options' => array(
-                'label' => 'Your photo'
-            ),
-            'attributes' => array(
-                'required' => 'required',
-                'id' => 'photo'
-            ),
-        ));
+//        $this->add(array(
+//            'type' => 'Zend\Form\Element\File',
+//            'name' => 'photo',
+//            'options' => array(
+//                'label' => 'Your photo'
+//            ),
+//            'attributes' => array(
+//                'required' => 'required',
+//                'id' => 'photo'
+//            ),
+//        ));
 
         // This is the special code that protects our form beign submitted from automated scripts
         $this->add(array(
@@ -177,7 +177,7 @@ class User extends Form
                                 'name' => 'NotEmpty',
                                 'options' => array(
                                     'messages' => array(
-                                        'isEmpty' => 'Name                 is                 required'
+                                        'isEmpty' => 'Name is required'
                                     )
                                 )
                             )
@@ -205,31 +205,31 @@ class User extends Form
                         )
             )));
 
-            $inputFilter->add($factory->createInput(array(
-                        'name' => 'photo',
-                        'validators' => array(
-                            array(
-                                'name' => 'filesize',
-                                'options' => array(
-                                    'max' => 2097152, // 2 MB
-                                ),
-                            ),
-                            array(
-                                'name' => 'filemimetype',
-                                'options' => array(
-                                    'mimeType' =>
-                                    'image/png,image/x-png,image/jpg,image/jpeg,image/gif',
-                                )
-                            ),
-                            array(
-                                'name' => 'fileimagesize',
-                                'options' => array(
-                                    'maxWidth' => 200,
-                                    'maxHeight' => 200
-                                )
-                            ),
-                        )
-            )));
+//            $inputFilter->add($factory->createInput(array(
+//                        'name' => 'photo',
+//                        'validators' => array(
+//                            array(
+//                                'name' => 'filesize',
+//                                'options' => array(
+//                                    'max' => 2097152, // 2 MB
+//                                ),
+//                            ),
+//                            array(
+//                                'name' => 'filemimetype',
+//                                'options' => array(
+//                                    'mimeType' =>
+//                                    'image/png,image/x-png,image/jpg,image/jpeg,image/gif',
+//                                )
+//                            ),
+//                            array(
+//                                'name' => 'fileimagesize',
+//                                'options' => array(
+//                                    'maxWidth' => 200,
+//                                    'maxHeight' => 200
+//                                )
+//                            ),
+//                        )
+//            )));
 
 
             $inputFilter->add($factory->createInput(array(
