@@ -112,5 +112,17 @@ class AccountController extends AbstractActionController
         }
 
     }
+
+    public function meAction()
+    {
+        return array();
+    }
+
+    public function deniedAction()
+    {
+        return array();
+    }
+    
+
 }
 
