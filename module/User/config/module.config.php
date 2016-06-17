@@ -12,8 +12,10 @@ return array(
           'database'                  => 'User\Service\Factory\Database',
         ),
         'invokables' => array(
-            'table-gateway'           => 'User\Service\Invokable\TableGateway'
-        )
+            'table-gateway'           => 'User\Service\Invokable\TableGateway',
+            'user-entity'             => 'User\Model\Entity\User',
+        ),
+        'shared'     => false,
     ),
     'controllers' => array(
         'invokables' => array(

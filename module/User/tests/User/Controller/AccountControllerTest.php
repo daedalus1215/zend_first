@@ -14,7 +14,7 @@ class AccountControllerTest extends AbstractHttpControllerTestCase
                 include __DIR__.'/../../config/application.config.php'
         );
         parent::setUp();
-    	
+
         $serviceManager = $this->getApplication()->getServiceManager();
         $db = $serviceManager->get('database');
         $sql  = file_get_contents(__DIR__.'/../../../sql/build.sqlite.sql')."\n" .
